@@ -28,31 +28,18 @@ or
 
 `$ make RTL8814=1 DEBUG=1`
 
-for setting monitor mode
+### TerraMon-NG (Monitor mode)
 
-1. Set interface down
-
-  `$ sudo ip link set wlan0 down`
-
-2. Set monitor mode
-
-  `$ sudo iwconfig wlan0 mode monitor`
-
-3. Set interface up
-
-  `$ sudo ip link set wlan0 up`
-
-for switching channels (interface must be up)
-
-Set channel 6, width 40 MHz:
+Installation:
 ```
-$ sudo iw wlan0 set channel 6 HT40-
+# sudo cp terramon-ng /usr/bin
+# sudo chmod +x /usr/bin/terramon-ng
 ```
-
-Set channel 149, width 80 MHz:
+You can then do
 ```
-$ sudo iw wlan0 set freq 5745 80 5775
+# terramon-ng --help
 ```
+for more info
 
 for setting TX power (v4.3.21 branch only):
 ```
