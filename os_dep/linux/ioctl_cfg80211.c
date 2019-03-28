@@ -174,16 +174,42 @@ static struct ieee80211_channel rtw_2ghz_channels[MAX_CHANNEL_NUM_2G] = {
 
 /* from center_ch_5g_20m */
 static struct ieee80211_channel rtw_5ghz_a_channels[MAX_CHANNEL_NUM_5G] = {
-	CHAN5G(36, 0),	CHAN5G(40, 0),	CHAN5G(44, 0),	CHAN5G(48, 0),
-
-	CHAN5G(52, 0),	CHAN5G(56, 0),	CHAN5G(60, 0),	CHAN5G(64, 0),
-
-	CHAN5G(100, 0),	CHAN5G(104, 0),	CHAN5G(108, 0),	CHAN5G(112, 0),
-	CHAN5G(116, 0),	CHAN5G(120, 0),	CHAN5G(124, 0),	CHAN5G(128, 0),
-	CHAN5G(132, 0),	CHAN5G(136, 0),	CHAN5G(140, 0),	CHAN5G(144, 0),
-
-	CHAN5G(149, 0),	CHAN5G(153, 0),	CHAN5G(157, 0),	CHAN5G(161, 0),
-	CHAN5G(165, 0),	CHAN5G(169, 0),	CHAN5G(173, 0),	CHAN5G(177, 0),
+	CHAN5G(36, 0),
+	CHAN5G(40, 0),
+	CHAN5G(44, 0),
+	CHAN5G(48, 0),
+	CHAN5G(52, 0),
+	CHAN5G(56, 0),
+	CHAN5G(60, 0),
+	CHAN5G(64, 0),
+	CHAN5G(100, 0),
+	CHAN5G(104, 0),
+	CHAN5G(108, 0),
+	CHAN5G(112, 0),
+	CHAN5G(116, 0),
+	CHAN5G(120, 0),
+	CHAN5G(124, 0),
+	CHAN5G(128, 0),
+	CHAN5G(132, 0),
+	CHAN5G(136, 0),
+	CHAN5G(140, 0),
+	CHAN5G(144, 0),
+	CHAN5G(149, 0),
+	CHAN5G(151, 0),
+	CHAN5G(153, 0),
+	CHAN5G(155, 0),
+	CHAN5G(157, 0),
+	CHAN5G(161, 0),
+	CHAN5G(165, 0),
+	CHAN5G(169, 0),
+	CHAN5G(173, 0),
+	CHAN5G(177, 0),
+	CHAN5G(184, 0),
+	CHAN5G(188, 0),
+	CHAN5G(192, 0),
+	CHAN5G(196, 0),
+	CHAN5G(200, 0),
+	CHAN5G(204, 0),
 };
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 29))
@@ -7187,7 +7213,7 @@ static void rtw_cfg80211_init_vht_capab(_adapter *padapter, struct ieee80211_sta
 
 	vht_cap->vht_supported = _TRUE;
 	rtw_vht_use_default_setting(padapter);
-	
+
 	/* Reference: core/rtw_vht.c */
 	/* MCS map */
 	vht_cap->vht_mcs.tx_mcs_map = pvhtpriv->vht_mcs_map[0] | (pvhtpriv->vht_mcs_map[1] << 8);
