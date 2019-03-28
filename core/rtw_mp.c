@@ -2647,7 +2647,7 @@ u8 HwRateToMPTRate(u8 rate)
 		break;
 
 	default:
-		RTW_INFO("hw_rate_to_m_rate(): Non supported Rate [%x]!!!\n", rate);
+		RTW_INFO("HwRateToMPTRate(): Non supported Rate [%x]!!!\n", rate);
 		break;
 	}
 	return ret_rate;
