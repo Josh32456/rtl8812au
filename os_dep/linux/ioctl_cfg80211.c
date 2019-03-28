@@ -4887,7 +4887,7 @@ static int cfg80211_rtw_get_channel(struct wiphy *wiphy, struct wireless_dev *wd
 	//DBG_871X("%s width 5\n", __func__);
 	width = NL80211_CHAN_WIDTH_5;
 	center_freq = control_freq;
-	break;	    
+	break;
       case CHANNEL_WIDTH_10:
 	//DBG_871X("%s width 5\n", __func__);
 	width = NL80211_CHAN_WIDTH_10;
@@ -7766,6 +7766,9 @@ static struct cfg80211_ops rtw_cfg80211_ops = {
 	.set_pmksa = cfg80211_rtw_set_pmksa,
 	.del_pmksa = cfg80211_rtw_del_pmksa,
 	.flush_pmksa = cfg80211_rtw_flush_pmksa,
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 11, 0))
+	.set_monitor_channel = cfg80211_rtw_set_monitor_channel,
+#endif
 
 #ifdef CONFIG_AP_MODE
 	.add_virtual_intf = cfg80211_rtw_add_virtual_intf,
