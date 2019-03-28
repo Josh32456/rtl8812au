@@ -404,7 +404,7 @@ void	expire_timeout_chk(_adapter *padapter)
 #ifndef CONFIG_ACTIVE_KEEP_ALIVE_CHECK
 #ifdef CONFIG_80211N_HT
 #ifdef CONFIG_TX_MCAST2UNI
-		if ((psta->flags & WLAN_STA_HT) && (psta->htpriv.agg_enable_bitmap || psta->under_exist_checking)) {
+		if ((psta->flags & RTW_WLAN_STA_HT) && (psta->htpriv.agg_enable_bitmap || psta->under_exist_checking)) {
 			/* check sta by delba(addba) for 11n STA */
 			/* ToDo: use CCX report to check for all STAs */
 			/* RTW_INFO("asoc check by DELBA/ADDBA! (pstapriv->expire_to=%d s)(psta->expire_to=%d s), [%02x, %d]\n", pstapriv->expire_to*2, psta->expire_to*2, psta->htpriv.agg_enable_bitmap, psta->under_exist_checking); */
@@ -2566,7 +2566,7 @@ static void associated_stainfo_update(_adapter *padapter, struct sta_info *psta,
 
 	if (sta_info_type & STA_INFO_UPDATE_BW) {
 
-		if ((psta->flags & WLAN_STA_HT) && !psta->ht_20mhz_set) {
+		if ((psta->flags & RTW_WLAN_STA_HT) && !psta->ht_20mhz_set) {
 			if (pmlmepriv->sw_to_20mhz) {
 				psta->cmn.bw_mode = CHANNEL_WIDTH_20;
 				/*psta->htpriv.ch_offset = HAL_PRIME_CHNL_OFFSET_DONT_CARE;*/
@@ -3152,7 +3152,7 @@ void bss_cap_update_on_sta_join(_adapter *padapter, struct sta_info *psta)
 #endif
 
 
-	if (!(psta->flags & WLAN_STA_SHORT_PREAMBLE)) {
+	if (!(psta->flags & RTW_WLAN_STA_SHORT_PREAMBLE)) {
 		if (!psta->no_short_preamble_set) {
 			psta->no_short_preamble_set = 1;
 
@@ -3175,7 +3175,7 @@ void bss_cap_update_on_sta_join(_adapter *padapter, struct sta_info *psta)
 	}
 
 #if 0
-	if (psta->flags & WLAN_STA_NONERP && !psta->nonerp_set) {
+	if (psta->flags & RTW_WLAN_STA_NONERP && !psta->nonerp_set) {
 		psta->nonerp_set = 1;
 		pmlmepriv->num_sta_non_erp++;
 		if (pmlmepriv->num_sta_non_erp == 1)
@@ -3183,7 +3183,7 @@ void bss_cap_update_on_sta_join(_adapter *padapter, struct sta_info *psta)
 	}
 #endif
 
-	if (psta->flags & WLAN_STA_NONERP) {
+	if (psta->flags & RTW_WLAN_STA_NONERP) {
 		if (!psta->nonerp_set) {
 			psta->nonerp_set = 1;
 
@@ -3244,7 +3244,7 @@ void bss_cap_update_on_sta_join(_adapter *padapter, struct sta_info *psta)
 	}
 
 #ifdef CONFIG_80211N_HT
-	if (psta->flags & WLAN_STA_HT) {
+	if (psta->flags & RTW_WLAN_STA_HT) {
 		u16 ht_capab = le16_to_cpu(psta->htpriv.ht_cap.cap_info);
 
 		RTW_INFO("HT: STA " MAC_FMT " HT Capabilities Info: 0x%04x\n",
@@ -3547,7 +3547,7 @@ void sta_info_update(_adapter *padapter, struct sta_info *psta)
 
 
 	/* update wmm cap. */
-	if (WLAN_STA_WME & flags)
+	if (RTW_WLAN_STA_WME & flags)
 		psta->qos_option = 1;
 	else
 		psta->qos_option = 0;
@@ -3558,7 +3558,7 @@ void sta_info_update(_adapter *padapter, struct sta_info *psta)
 
 #ifdef CONFIG_80211N_HT
 	/* update 802.11n ht cap. */
-	if (WLAN_STA_HT & flags) {
+	if (RTW_WLAN_STA_HT & flags) {
 		psta->htpriv.ht_option = _TRUE;
 		psta->qos_option = 1;
 
@@ -3572,7 +3572,7 @@ void sta_info_update(_adapter *padapter, struct sta_info *psta)
 
 #ifdef CONFIG_80211AC_VHT
 	/* update 802.11AC vht cap. */
-	if (WLAN_STA_VHT & flags)
+	if (RTW_WLAN_STA_VHT & flags)
 		psta->vhtpriv.vht_option = _TRUE;
 	else
 		psta->vhtpriv.vht_option = _FALSE;

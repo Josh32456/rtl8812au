@@ -2826,14 +2826,14 @@ unsigned int OnAssocReq(_adapter *padapter, union recv_frame *precv_frame)
 	rtw_ap_parse_sta_ht_ie(padapter, pstat, &elems);
 	rtw_ap_parse_sta_vht_ie(padapter, pstat, &elems);
 
-	if (((pstat->flags & WLAN_STA_HT) || (pstat->flags & WLAN_STA_VHT)) &&
+	if (((pstat->flags & RTW_WLAN_STA_HT) || (pstat->flags & WLAN_STA_VHT)) &&
 	    ((pstat->wpa2_pairwise_cipher & WPA_CIPHER_TKIP) ||
 	     (pstat->wpa_pairwise_cipher & WPA_CIPHER_TKIP))) {
 
 		RTW_INFO("(V)HT: " MAC_FMT " tried to use TKIP with (V)HT association\n", MAC_ARG(pstat->cmn.mac_addr));
 
-		pstat->flags &= ~WLAN_STA_HT;
-		pstat->flags &= ~WLAN_STA_VHT;
+		pstat->flags &= ~RTW_WLAN_STA_HT;
+		pstat->flags &= ~RTW_WLAN_STA_VHT;
 		/*status = WLAN_STATUS_CIPHER_REJECTED_PER_POLICY;
 		  * goto OnAssocReqFail;
 		*/
@@ -8479,7 +8479,7 @@ void issue_asocrsp(_adapter *padapter, unsigned short status, struct sta_info *p
 #endif /* CONFIG_IEEE80211W */
 
 #ifdef CONFIG_80211N_HT
-	if ((pstat->flags & WLAN_STA_HT) && (pmlmepriv->htpriv.ht_option)) {
+	if ((pstat->flags & RTW_WLAN_STA_HT) && (pmlmepriv->htpriv.ht_option)) {
 		uint ie_len = 0;
 
 		/* FILL HT CAP INFO IE */
@@ -8540,7 +8540,7 @@ void issue_asocrsp(_adapter *padapter, unsigned short status, struct sta_info *p
 #endif /* CONFIG_80211AC_VHT */
 
 	/* FILL WMM IE */
-	if ((pstat->flags & WLAN_STA_WME) && (pmlmepriv->qospriv.qos_option)) {
+	if ((pstat->flags & RTW_WLAN_STA_WME) && (pmlmepriv->qospriv.qos_option)) {
 		uint ie_len = 0;
 		unsigned char WMM_PARA_IE[] = {0x00, 0x50, 0xf2, 0x02, 0x01, 0x01};
 

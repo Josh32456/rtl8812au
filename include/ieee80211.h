@@ -70,22 +70,22 @@ enum {
 };
 
 /* STA flags */
-#define WLAN_STA_AUTH BIT(0)
-#define WLAN_STA_ASSOC BIT(1)
-#define WLAN_STA_PS BIT(2)
-#define WLAN_STA_TIM BIT(3)
-#define WLAN_STA_PERM BIT(4)
-#define WLAN_STA_AUTHORIZED BIT(5)
-#define WLAN_STA_PENDING_POLL BIT(6) /* pending activity poll not ACKed */
-#define WLAN_STA_SHORT_PREAMBLE BIT(7)
-#define WLAN_STA_PREAUTH BIT(8)
-#define WLAN_STA_WME BIT(9)
-#define WLAN_STA_MFP BIT(10)
-#define WLAN_STA_HT BIT(11)
-#define WLAN_STA_WPS BIT(12)
-#define WLAN_STA_MAYBE_WPS BIT(13)
-#define WLAN_STA_VHT BIT(14)
-#define WLAN_STA_NONERP BIT(31)
+#define RTW_WLAN_STA_AUTH BIT(0)
+#define RTW_WLAN_STA_ASSOC BIT(1)
+#define RTW_WLAN_STA_PS BIT(2)
+#define RTW_WLAN_STA_TIM BIT(3)
+#define RTW_WLAN_STA_PERM BIT(4)
+#define RTW_WLAN_STA_AUTHORIZED BIT(5)
+#define RTW_WLAN_STA_PENDING_POLL BIT(6) /* pending activity poll not ACKed */
+#define RTW_WLAN_STA_SHORT_PREAMBLE BIT(7)
+#define RTW_WLAN_STA_PREAUTH BIT(8)
+#define RTW_WLAN_STA_WME BIT(9)
+#define RTW_WLAN_STA_MFP BIT(10)
+#define RTW_WLAN_STA_HT BIT(11)
+#define RTW_WLAN_STA_WPS BIT(12)
+#define RTW_WLAN_STA_MAYBE_WPS BIT(13)
+#define RTW_WLAN_STA_VHT BIT(14)
+#define RTW_WLAN_STA_NONERP BIT(31)
 
 #endif
 

@@ -7451,7 +7451,7 @@ static int rtw_add_sta(struct net_device *dev, struct ieee_param *param)
 
 
 		/* check wmm cap. */
-		if (WLAN_STA_WME & flags)
+		if (RTW_WLAN_STA_WME & flags)
 			psta->qos_option = 1;
 		else
 			psta->qos_option = 0;
@@ -7462,7 +7462,7 @@ static int rtw_add_sta(struct net_device *dev, struct ieee_param *param)
 
 #ifdef CONFIG_80211N_HT
 		/* chec 802.11n ht cap. */
-		if (WLAN_STA_HT & flags) {
+		if (RTW_WLAN_STA_HT & flags) {
 			psta->htpriv.ht_option = _TRUE;
 			psta->qos_option = 1;
 			_rtw_memcpy((void *)&psta->htpriv.ht_cap, (void *)&param->u.add_sta.ht_cap, sizeof(struct rtw_ieee80211_ht_cap));

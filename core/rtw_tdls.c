@@ -430,16 +430,16 @@ void rtw_tdls_process_ht_cap(_adapter *padapter, struct sta_info *ptdls_sta, u8 
 	/* Save HT capabilities in the sta object */
 	_rtw_memset(&ptdls_sta->htpriv.ht_cap, 0, sizeof(struct rtw_ieee80211_ht_cap));
 	if (data && Length >= sizeof(struct rtw_ieee80211_ht_cap)) {
-		ptdls_sta->flags |= WLAN_STA_HT;
-		ptdls_sta->flags |= WLAN_STA_WME;
+		ptdls_sta->flags |= RTW_WLAN_STA_HT;
+		ptdls_sta->flags |= RTW_WLAN_STA_WME;
 
 		_rtw_memcpy(&ptdls_sta->htpriv.ht_cap, data, sizeof(struct rtw_ieee80211_ht_cap));
 	} else {
-		ptdls_sta->flags &= ~WLAN_STA_HT;
+		ptdls_sta->flags &= ~RTW_WLAN_STA_HT;
 		return;
 	}
 
-	if (ptdls_sta->flags & WLAN_STA_HT) {
+	if (ptdls_sta->flags & RTW_WLAN_STA_HT) {
 		if (padapter->registrypriv.ht_enable == _TRUE) {
 			ptdls_sta->htpriv.ht_option = _TRUE;
 			ptdls_sta->qos_option = _TRUE;
@@ -541,7 +541,7 @@ void rtw_tdls_process_vht_cap(_adapter *padapter, struct sta_info *ptdls_sta, u8
 
 	_rtw_memset(&ptdls_sta->vhtpriv, 0, sizeof(struct vht_priv));
 	if (data && Length == 12) {
-		ptdls_sta->flags |= WLAN_STA_VHT;
+		ptdls_sta->flags |= RTW_WLAN_STA_VHT;
 
 		_rtw_memcpy(ptdls_sta->vhtpriv.vht_cap, data, 12);
 
@@ -554,11 +554,11 @@ void rtw_tdls_process_vht_cap(_adapter *padapter, struct sta_info *ptdls_sta, u8
 		ptdls_sta->vhtpriv.vht_op_mode_notify = CHANNEL_WIDTH_80;
 #endif
 	} else {
-		ptdls_sta->flags &= ~WLAN_STA_VHT;
+		ptdls_sta->flags &= ~RTW_WLAN_STA_VHT;
 		return;
 	}
 
-	if (ptdls_sta->flags & WLAN_STA_VHT) {
+	if (ptdls_sta->flags & RTW_WLAN_STA_VHT) {
 		if (REGSTY_IS_11AC_ENABLE(&padapter->registrypriv)
 		    && hal_chk_proto_cap(padapter, PROTO_CAP_11AC)
 		    && (!rfctl->country_ent || COUNTRY_CHPLAN_EN_11AC(rfctl->country_ent)))
