@@ -4907,29 +4907,29 @@ static int cfg80211_rtw_get_channel(struct wiphy *wiphy, struct wireless_dev *wd
     dvobj=adapter_to_dvobj(padapter);
     if (dvobj!=NULL) {
       bandWidth = adapter_to_dvobj(padapter)->oper_bwmode;
-      //DBG_871X("%s bw %d\n", __func__,adapter_to_dvobj(padapter)->oper_bwmode);
+      //RTW_INFO("%s bw %d\n", __func__,adapter_to_dvobj(padapter)->oper_bwmode);
     } else {
       bandWidth = pHalData->current_channel_bw;
-      //DBG_871X("%s dvobj null\n", __func__);
+      //RTW_INFO("%s dvobj null\n", __func__);
     }
     switch(pHalData->current_channel_bw){
       case CHANNEL_WIDTH_5:
-	//DBG_871X("%s width 5\n", __func__);
+	//RTW_INFO("%s width 5\n", __func__);
 	width = NL80211_CHAN_WIDTH_5;
 	center_freq = control_freq;
 	break;
       case CHANNEL_WIDTH_10:
-	//DBG_871X("%s width 5\n", __func__);
+	//RTW_INFO("%s width 5\n", __func__);
 	width = NL80211_CHAN_WIDTH_10;
 	center_freq = control_freq;
 	break;
       case CHANNEL_WIDTH_20:
-	//DBG_871X("%s width 20\n", __func__);
+	//RTW_INFO("%s width 20\n", __func__);
 	width = NL80211_CHAN_WIDTH_20;
 	center_freq = control_freq;
 	break;
       case CHANNEL_WIDTH_40:
-	//DBG_871X("%s width 40\n", __func__);
+	//RTW_INFO("%s width 40\n", __func__);
 	width = NL80211_CHAN_WIDTH_40;
 	if (offset==HAL_PRIME_CHNL_OFFSET_LOWER) {
 	  center_freq = control_freq +10;
@@ -4938,7 +4938,7 @@ static int cfg80211_rtw_get_channel(struct wiphy *wiphy, struct wireless_dev *wd
 	}
 	break;
       case CHANNEL_WIDTH_80:
-	//DBG_871X("%s width 80\n", __func__);
+	//RTW_INFO("%s width 80\n", __func__);
 	width = NL80211_CHAN_WIDTH_80;
 	if (offset==HAL_PRIME_CHNL_OFFSET_LOWER) {
 	  center_freq = control_freq +30;
@@ -4947,7 +4947,7 @@ static int cfg80211_rtw_get_channel(struct wiphy *wiphy, struct wireless_dev *wd
 	}
 	break;
       case CHANNEL_WIDTH_160:
-	//DBG_871X("%s width 160\n", __func__);
+	//RTW_INFO("%s width 160\n", __func__);
 	width = NL80211_CHAN_WIDTH_160;
 	if (offset==HAL_PRIME_CHNL_OFFSET_LOWER) {
 	  center_freq = control_freq +50;
@@ -4956,7 +4956,7 @@ static int cfg80211_rtw_get_channel(struct wiphy *wiphy, struct wireless_dev *wd
 	}
 	break;
       case CHANNEL_WIDTH_80_80:
-	//DBG_871X("%s width 80x80\n", __func__);
+	//RTW_INFO("%s width 80x80\n", __func__);
 	width = NL80211_CHAN_WIDTH_80P80;
 	if (offset==HAL_PRIME_CHNL_OFFSET_LOWER) {
 	  center_freq = control_freq +30;
@@ -4967,23 +4967,23 @@ static int cfg80211_rtw_get_channel(struct wiphy *wiphy, struct wireless_dev *wd
 	}
 	break;
       case CHANNEL_WIDTH_MAX:
-	//DBG_871X("%s width max\n", __func__);
+	//RTW_INFO("%s width max\n", __func__);
 	width = NL80211_CHAN_WIDTH_160;
 	break;
     }
     chandef->chan = ieee80211_get_channel(wiphy, control_freq);
     if (chandef->chan == NULL) {
       chandef->chan = ieee80211_get_channel(wiphy, ieee80211_channel_to_frequency(channel, band));
-      //DBG_871X("%s chan null\n", __func__);
+      //RTW_INFO("%s chan null\n", __func__);
       if (chandef->chan == NULL) {
-	//DBG_871X("%s chan null\n", __func__);
+	//RTW_INFO("%s chan null\n", __func__);
 	return -EINVAL;
       }
     }
     chandef->width = width;
     chandef->center_freq1 = center_freq;
     chandef->center_freq2 = center_freq2;
-    //DBG_871X("%s : channel %d width %d freq1 %d freq2 %d center_freq %d offset %d\n", __func__, channel, width, chandef->center_freq1, chandef->center_freq2, chandef->chan->center_freq,rtw_get_oper_choffset(padapter));
+    //RTW_INFO("%s : channel %d width %d freq1 %d freq2 %d center_freq %d offset %d\n", __func__, channel, width, chandef->center_freq1, chandef->center_freq2, chandef->chan->center_freq,rtw_get_oper_choffset(padapter));
   } else {
       return -EINVAL;
   }
@@ -5034,105 +5034,6 @@ static int	cfg80211_rtw_set_channel(struct wiphy *wiphy
 		, FUNC_ADPT_ARG(padapter), chan_target, chan_width, chan_offset);
 
 	rtw_set_chbw_cmd(padapter, chan_target, chan_width, chan_offset, RTW_CMDF_WAIT_ACK);
-
-	return 0;
-}
-
-static int cfg80211_rtw_set_monitor_channel(struct wiphy *wiphy
-#if (CFG80211_API_LEVEL >= KERNEL_VERSION(3, 8, 0))
-	, struct cfg80211_chan_def *chandef
-#else
-	, struct ieee80211_channel *chan
-	, enum nl80211_channel_type channel_type
-#endif
-)
-{
-#if (CFG80211_API_LEVEL >= KERNEL_VERSION(3, 8, 0))
-	struct ieee80211_channel *chan = chandef->chan;
-#endif
-
-	_adapter *padapter = wiphy_to_adapter(wiphy);
-	int target_channal = chan->hw_value;
-	int target_offset = HAL_PRIME_CHNL_OFFSET_DONT_CARE;
-	int target_width = CHANNEL_WIDTH_20;
-
-#if (CFG80211_API_LEVEL >= KERNEL_VERSION(3, 8, 0))
-#ifdef CONFIG_DEBUG_CFG80211
-	RTW_INFO("center_freq %u Mhz ch %u width %u freq1 %u freq2 %u\n"
-		, chan->center_freq
-		, chan->hw_value
-		, chandef->width
-		, chandef->center_freq1
-		, chandef->center_freq2);
-#endif /* CONFIG_DEBUG_CFG80211 */
-
-	switch (chandef->width) {
-	case NL80211_CHAN_WIDTH_20_NOHT:
-	case NL80211_CHAN_WIDTH_20:
-		target_width = CHANNEL_WIDTH_20;
-		target_offset = HAL_PRIME_CHNL_OFFSET_DONT_CARE;
-		break;
-	case NL80211_CHAN_WIDTH_40:
-		target_width = CHANNEL_WIDTH_40;
-		if (chandef->center_freq1 > chan->center_freq)
-			target_offset = HAL_PRIME_CHNL_OFFSET_LOWER;
-		else
-			target_offset = HAL_PRIME_CHNL_OFFSET_UPPER;
-		break;
-	case NL80211_CHAN_WIDTH_80:
-		target_width = CHANNEL_WIDTH_80;
-		target_offset = HAL_PRIME_CHNL_OFFSET_DONT_CARE;
-		break;
-	case NL80211_CHAN_WIDTH_80P80:
-		target_width = CHANNEL_WIDTH_80_80;
-		target_offset = HAL_PRIME_CHNL_OFFSET_DONT_CARE;
-		break;
-	case NL80211_CHAN_WIDTH_160:
-		target_width = CHANNEL_WIDTH_160;
-		target_offset = HAL_PRIME_CHNL_OFFSET_DONT_CARE;
-		break;
-
-#if (CFG80211_API_LEVEL >= KERNEL_VERSION(3, 11, 0))
-	case NL80211_CHAN_WIDTH_5:
-	case NL80211_CHAN_WIDTH_10:
-#endif
-	default:
-		target_width = CHANNEL_WIDTH_20;
-		target_offset = HAL_PRIME_CHNL_OFFSET_DONT_CARE;
-		break;
-	}
-#else
-#ifdef CONFIG_DEBUG_CFG80211
-	RTW_INFO("center_freq %u MHz ch %u channel_type %u\n"
-		, chan->center_freq
-		, chan->hw_value
-		, channel_type);
-#endif /* CONFIG_DEBUG_CFG80211 */
-
-	switch (channel_type) {
-	case NL80211_CHAN_NO_HT:
-	case NL80211_CHAN_HT20:
-		target_width = CHANNEL_WIDTH_20;
-		target_offset = HAL_PRIME_CHNL_OFFSET_DONT_CARE;
-		break;
-	case NL80211_CHAN_HT40MINUS:
-		target_width = CHANNEL_WIDTH_40;
-		target_offset = HAL_PRIME_CHNL_OFFSET_UPPER;
-		break;
-	case NL80211_CHAN_HT40PLUS:
-		target_width = CHANNEL_WIDTH_40;
-		target_offset = HAL_PRIME_CHNL_OFFSET_LOWER;
-		break;
-	default:
-		target_width = CHANNEL_WIDTH_20;
-		target_offset = HAL_PRIME_CHNL_OFFSET_DONT_CARE;
-		break;
-	}
-#endif
-	RTW_INFO(FUNC_ADPT_FMT" ch:%d bw:%d, offset:%d\n"
-		, FUNC_ADPT_ARG(padapter), target_channal, target_width, target_offset);
-
-	rtw_set_chbw_cmd(padapter, target_channal, target_width, target_offset, RTW_CMDF_WAIT_ACK);
 
 	return 0;
 }
@@ -7276,7 +7177,7 @@ static void rtw_cfg80211_init_vht_capab(_adapter *padapter, struct ieee80211_sta
 		  	vht_cap->cap |= IEEE80211_VHT_CAP_RXSTBC_3;/*RX STBC Three spatial streams*/
 			break;
 		default:
-		  	/* DBG_871X("[warning] rf_type %d is not expected\n", rf_type); */
+		  	/* RTW_INFO("[warning] rf_type %d is not expected\n", rf_type); */
 		  	break;
 		}
 	}
@@ -7369,7 +7270,7 @@ static void rtw_cfg80211_init_vht_capab_ex(_adapter *padapter, struct ieee80211_
 			vht_cap->cap |= IEEE80211_VHT_CAP_RXSTBC_3;/*RX STBC Three spatial streams*/
 			break;
 		default:
-			/* DBG_871X("[warning] rf_type %d is not expected\n", rf_type); */
+			/* RTW_INFO("[warning] rf_type %d is not expected\n", rf_type); */
 			break;
 		}
 	}
@@ -7391,7 +7292,7 @@ static void rtw_cfg80211_init_vht_capab_ex(_adapter *padapter, struct ieee80211_
 		vht_cap->vht_mcs.rx_highest = MAX_BIT_RATE_80MHZ_NSS3;
 		break;
 	default:
-		DBG_871X("[warning] rf_type %d is not expected\n", rf_type);
+		RTW_INFO("[warning] rf_type %d is not expected\n", rf_type);
 		break;
 	} */
 
