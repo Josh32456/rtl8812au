@@ -22,7 +22,7 @@ This driver can be installed using [DKMS]. This is a system which will automatic
  
 Open a terminal and execute the following command:
 ```
-sudo apt-get install dkms build-essential bc libelf-dev linux-headers-`uname -r -y && cd /usr/share && git clone https://github.com/aircrack-ng/rtl8812au && cd /rtl8812au && make && make install
+sudo apt-get install dkms build-essential bc libelf-dev linux-headers-$(uname -r) -y && cd /usr/share && git clone https://github.com/aircrack-ng/rtl8812au && cd /rtl8812au && make && make install
 
 
 ```
