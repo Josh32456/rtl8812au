@@ -17,16 +17,12 @@
 
 ### Supports Realtek 8811, 8812, 8814 and 8821 chipsets
 
-### DKMS
+### DKMS Installation of Driver
 This driver can be installed using [DKMS]. This is a system which will automatically recompile and install a kernel module when a new kernel gets installed or updated. To make use of DKMS, install the `dkms` package, which on Debian (based) systems is done like this:
+ 
+Open a terminal and execute the following command:
 ```
-sudo apt-get install dkms
-```
-
-### Installation of Driver
-In order to install the driver open a terminal in the directory with the source code and execute the following command:
-```
-sudo apt-get install build-essential bc libelf-dev linux-headers-`uname -r cd /usr/share && git clone https://github.com/aircrack-ng/rtl8812au && cd /rtl8812au && make && make install
+sudo apt-get install dkms build-essential bc libelf-dev linux-headers-`uname -r -y && cd /usr/share && git clone https://github.com/aircrack-ng/rtl8812au && cd /rtl8812au && make && make install
 
 
 ```
