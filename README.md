@@ -26,34 +26,17 @@ sudo apt-get install dkms
 ### Installation of Driver
 In order to install the driver open a terminal in the directory with the source code and execute the following command:
 ```
-sudo ./dkms-install.sh
+sudo apt-get install build-essential bc libelf-dev linux-headers-`uname -r cd /usr/share && git clone https://github.com/aircrack-ng/rtl8812au && cd /rtl8812au && make && make install
+
+
 ```
 
 ### Removal of Driver
 In order to remove the driver from your system open a terminal in the directory with the source code and execute the following command:
 ```
-sudo ./dkms-remove.sh
+sudo /usr/share/rtl8812au/.dkms-remove.sh
 ```
 
-### Make
-For building & installing the driver with 'make' use
-```
-make
-make install
-```
-
-### Notes
-Download
-```
-git clone -b v5.3.4 https://github.com/aircrack-ng/rtl8812au.git
-cd rtl*
-```
-Package / Build dependencies (Kali)
-```
-sudo apt-get install build-essential
-sudo apt-get install bc
-sudo apt-get install libelf-dev
-sudo apt-get install linux-headers-`uname -r`
 ```
 #### For Raspberry (RPI)
 
