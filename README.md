@@ -28,7 +28,7 @@ sudo apt-get install dkms build-essential bc libelf-dev linux-headers-$(uname -r
 For setting monitor mode
   1. Fix problematic interference in monitor mode. 
   ```
-  airmon-ng check kill
+  airmon-ng check kill && sudo service NetworkManager restart
   ```
   You may also uncheck the box "Automatically connect to this network when it is avaiable" in nm-connection-editor. This only works if you have a saved wifi connection.
   
