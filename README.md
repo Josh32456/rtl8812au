@@ -25,18 +25,13 @@ Open a terminal and execute the following command:
 sudo apt-get install dkms build-essential bc libelf-dev linux-headers-$(uname -r) -y && cd /usr/share && git clone https://github.com/aircrack-ng/rtl8812au && cd rtl8812au && make && make install
 ```
 
-For setting monitor mode
-  1. Fix problematic interference in monitor mode. 
+Set interface down + monitor mode + activate interface + TX power
+
   ```
-  airmon-ng check kill && sudo service NetworkManager restart
+  airmon-ng check kill && sudo service NetworkManager restart && sudo ip link set wlan0 down && sudo iw dev wlan0 set type monitor && sudo ip link set wlan0 up && sudo iw wlan0 set txpower fixed 3000
   ```
   You may also uncheck the box "Automatically connect to this network when it is avaiable" in nm-connection-editor. This only works if you have a saved wifi connection.
   
-  2. Set interface down + monitor mode + activate interface + TX power
-  ```
-  sudo ip link set wlan0 down && sudo iw dev wlan0 set type monitor && sudo ip link set wlan0 up && sudo iw wlan0 set txpower fixed 3000
-  ```
-
 
 #### For Raspberry (RPI)
 
