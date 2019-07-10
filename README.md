@@ -23,8 +23,6 @@ This driver can be installed using [DKMS]. This is a system which will automatic
 Open a terminal and execute the following command:
 ```
 sudo apt-get install dkms build-essential bc libelf-dev linux-headers-$(uname -r) -y && cd /usr/share && git clone https://github.com/aircrack-ng/rtl8812au && cd rtl8812au && make && make install
-
-
 ```
 
 ### Removal of Driver
@@ -33,7 +31,6 @@ In order to remove the driver from your system open a terminal in the directory 
 sudo /usr/share/rtl8812au/.dkms-remove.sh
 ```
 
-```
 #### For Raspberry (RPI)
 
 ```
@@ -62,7 +59,7 @@ For setting monitor mode
   2. Set interface down + monitor mode + activate interface + TX power
   ```
   sudo ip link set wlan0 down &&  sudo iw dev wlan0 set type monitor && sudo ip link set wlan0 up && sudo iw wlan0 set txpower fixed 3000
-
+  ```
 
 ### LED control
 
