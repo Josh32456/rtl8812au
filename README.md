@@ -59,22 +59,10 @@ For setting monitor mode
   ```
   You may also uncheck the box "Automatically connect to this network when it is avaiable" in nm-connection-editor. This only works if you have a saved wifi connection.
   
-  2. Set interface down
+  2. Set interface down + monitor mode + activate interface + TX power
   ```
-  sudo ip link set wlan0 down
-  ``` 
-  3. Set monitor mode
-  ```
-  sudo iw dev wlan0 set type monitor
-  ```
-  4. Set interface up
-  ```
-  sudo ip link set wlan0 up
-  ```
-For setting TX power
-```
-sudo iw wlan0 set txpower fixed 3000
-```
+  sudo ip link set wlan0 down &&  sudo iw dev wlan0 set type monitor && sudo ip link set wlan0 up && sudo iw wlan0 set txpower fixed 3000
+
 
 ### LED control
 
