@@ -104,10 +104,10 @@ export ARCH=arm
 
 Make
 
-Done enjoy your 8188eu.ko inside this same directory. Transfer it to your nethunter by reflashing
+Done enjoy your 8812au.ko inside this same directory. Transfer it to your nethunter by reflashing
 kernel after including it inside /lib/modules/(uname -r)/. 
 
-## Load the driver (8188eu.ko)
+## Load the driver (8812au.ko)
 ```
 su
 cd /system/lib/modules
