@@ -98,7 +98,7 @@ INSTALL_PREFIX := leave as it is
 
 Endif
 
-## Step 4- from inside of rtl8188eus directory 
+## Step 4- from inside of rtl8812au directory 
 
 export ARCH=arm
 
