@@ -17,11 +17,7 @@
 
 ### Supports Realtek 8811, 8812, 8814 (Alfa 1900) and 8821 chipsets
 
-
-### Check Drivers
-
-    modinfo iwlwifi && lspci && ifconfig && sudo lshw -C network && lsusb && lspci -vnn | grep -i net
-
+#
 ### DKMS Installation of Driver
 This driver can be installed using [DKMS]. This is a system which will automatically recompile and install a kernel module when a new kernel gets installed or updated. To make use of DKMS, install the `dkms` package, which on Debian (based) systems is done like this:
  
@@ -33,8 +29,14 @@ apt-get install git dkms build-essential bc libelf-dev linux-headers-`uname -r` 
 #
 #
 #
-  
 
+### Check Drivers
+
+    modinfo iwlwifi && lspci && ifconfig && sudo lshw -C network && lsusb && lspci -vnn | grep -i net  
+
+#
+#
+#
 #### For Raspberry (RPI)
 
 ```
