@@ -20,7 +20,7 @@
 
 ### Check Drivers
 
-    ifconfig && lscpi && lsusb && lspci -vnn | grep -i net
+    modinfo iwlwifi && ifconfig && lscpi && lsusb && lspci -vnn | grep -i net && 
 
 ### DKMS Installation of Driver
 This driver can be installed using [DKMS]. This is a system which will automatically recompile and install a kernel module when a new kernel gets installed or updated. To make use of DKMS, install the `dkms` package, which on Debian (based) systems is done like this:
