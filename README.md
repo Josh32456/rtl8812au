@@ -24,6 +24,8 @@
 https://gist.github.com/4k4xs4pH1r3/2196035667b41107d903ebc5a771d956
 
 
+#
+#
 ### DKMS Installation of Driver
 This driver can be installed using [DKMS]. This is a system which will automatically recompile and install a kernel module when a new kernel gets installed or updated. To make use of DKMS, install the `dkms` package, which on Debian (based) systems is done like this:
  
