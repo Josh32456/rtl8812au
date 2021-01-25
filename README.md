@@ -31,7 +31,7 @@ This driver can be installed using [DKMS]. This is a system which will automatic
  
 Open a terminal and execute the following command:
 ```
-apt-get install aptitude git dkms build-essential bc libelf-dev linux-headers-`uname -r` -y && aptitude install python3 python3-pexpect -y && cd /usr/share && git clone https://github.com/aircrack-ng/rtl8812au && cd rtl8812au && make && make install && cd
+apt-get install aptitude python3 python3-pexpect git dkms build-essential bc libelf-dev linux-headers-`uname -r` -y && cd /usr/share && git clone https://github.com/aircrack-ng/rtl8812au && cd rtl8812au && make && make install && cd
 ```
 
 #
