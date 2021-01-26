@@ -17,6 +17,7 @@
 
 ### Supports Realtek 8811, 8812, 8814 (Alfa 1900) and 8821 chipsets
 
+Connect your Alfa device to the USB port
 #
 #
 #
@@ -25,9 +26,9 @@ This driver can be installed using [DKMS]. This is a system which will automatic
  
 Open a terminal and execute the following command:
 ```
-sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo lsusb && sudo apt install dkms realtek-rtl88xxau-dkms aptitude && aptitude install python3 python3-pexpect git build-essential bc libelf-dev -y && cd /usr/share && git clone https://github.com/aircrack-ng/rtl8812au && cd rtl8812au && make && make install && cd && reboot
+sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo lsusb && sudo apt install dkms realtek-rtl88xxau-dkms
 ```
-
+Reboot your machine
 #
 #
 #
