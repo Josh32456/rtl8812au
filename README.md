@@ -18,12 +18,6 @@
 ### Supports Realtek 8811, 8812, 8814 (Alfa 1900) and 8821 chipsets
 
 #
-
-## Install Python
-
-https://gist.github.com/4k4xs4pH1r3/2196035667b41107d903ebc5a771d956
-
-
 #
 #
 ### DKMS Installation of Driver
@@ -31,7 +25,7 @@ This driver can be installed using [DKMS]. This is a system which will automatic
  
 Open a terminal and execute the following command:
 ```
-apt-get install aptitude python3 python3-pexpect git dkms build-essential bc libelf-dev linux-headers-`uname -r` -y && cd /usr/share && git clone https://github.com/aircrack-ng/rtl8812au && cd rtl8812au && make && make install && cd
+sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo lsusb && sudo apt install dkms realtek-rtl88xxau-dkms aptitude && aptitude install python3 python3-pexpect git build-essential bc libelf-dev -y && cd /usr/share && git clone https://github.com/aircrack-ng/rtl8812au && cd rtl8812au && make && make install && cd && reboot
 ```
 
 #
