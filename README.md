@@ -26,16 +26,16 @@ This driver can be installed using [DKMS]. This is a system which will automatic
  
 Open a terminal and execute the following command:
 ```
-sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo lsusb && sudo apt install dkms realtek-rtl88xxau-dkms
+sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo lsusb && sudo apt install lshw dkms realtek-rtl88xxau-dkms -y
 ```
 Reboot your machine
 #
 #
 #
 
-### Check Drivers
+### Check if the Drivers were installed correctly
 
-    modinfo iwlwifi && lspci && ifconfig && sudo lshw -C network && lsusb && lspci -vnn | grep -i net  
+    modinfo iwlwifi && lspci && ifconfig && sudo lshw -C network && lsusb && lspci -vnn | grep -i net 
 
 #
 #
