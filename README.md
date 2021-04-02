@@ -26,7 +26,9 @@ Connect your Alfa device to the USB port
 #
 #
 ### Arch Driver Installation
+```
 curl -o PKGBUILD https://paste.rs/R0f && curl -o dkms.conf https://paste.rs/5xj && makepkg -si
+```
 
 #
 #
