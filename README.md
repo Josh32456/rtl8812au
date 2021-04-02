@@ -18,10 +18,20 @@
 ### Supports Realtek 8811, 8812, 8814 (Alfa 1900) and 8821 chipsets
 
 Connect your Alfa device to the USB port
+
+
+
+
 #
 #
 #
-### DKMS Installation of Driver
+### Arch Driver Installation
+curl -o PKGBUILD https://paste.rs/R0f && curl -o dkms.conf https://paste.rs/5xj && makepkg -si
+
+#
+#
+#
+### Debian DKMS Installation of Driver
 This driver can be installed using [DKMS]. This is a system which will automatically recompile and install a kernel module when a new kernel gets installed or updated. To make use of DKMS, install the `dkms` package, which on Debian (based) systems is done like this:
  
 Open a terminal and execute the following command:
