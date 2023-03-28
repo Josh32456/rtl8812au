@@ -98,6 +98,12 @@ Package / Build dependencies (Kali)
 $ sudo apt-get update
 $ sudo apt-get install bc mokutil build-essential libelf-dev linux-headers-`uname -r`
 ```
+#### For Proxmox Virtual Environment (PVE)
+Package / Build dependencies
+```
+$ sudo apt-get update
+$ sudo apt-get install bc mokutil build-essential libelf-dev pve-headers-`uname -r`
+```
 #### For Raspberry (RPI)
 
 ```
