@@ -3,28 +3,12 @@ EXTRA_CFLAGS += -O1
 #EXTRA_CFLAGS += -O3
 EXTRA_CFLAGS += -Wall
 EXTRA_CFLAGS += -Wextra
-#EXTRA_CFLAGS += -Werror
-#EXTRA_CFLAGS += -pedantic
-#EXTRA_CFLAGS += -Wshadow -Wpointer-arith -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes
-
-#EXTRA_CFLAGS += -Wno-tautological-compare
-#EXTRA_CFLAGS += -Wno-incompatible-pointer-types
-#EXTRA_CFLAGS += -Wno-switch
-#EXTRA_CFLAGS += -Wmissing-field-initializers
-EXTRA_CFLAGS += -Wno-cast-function-type
 EXTRA_CFLAGS += -Wno-unused-variable
 EXTRA_CFLAGS += -Wno-unused-value
 EXTRA_CFLAGS += -Wno-unused-label
 EXTRA_CFLAGS += -Wno-unused-parameter
 EXTRA_CFLAGS += -Wno-unused-function
 EXTRA_CFLAGS += -Wno-unused
-EXTRA_CFLAGS += -Wno-date-time
-#EXTRA_CFLAGS += -Wno-misleading-indentation
-EXTRA_CFLAGS += -Wno-uninitialized
-# Relax some warnings from '-Wextra' so we won't get flooded with warnings
-EXTRA_CFLAGS += -Wno-sign-compare
-#EXTRA_CFLAGS += -Wno-missing-field-initializers
-EXTRA_CFLAGS += -Wno-type-limits
 
 GCC_VER_49 := $(shell echo `$(CC) -dumpversion | cut -f1-2 -d.` \>= 4.9 | bc )
 ifeq ($(GCC_VER_49),1)
@@ -48,7 +32,7 @@ CONFIG_USB_HCI = y
 CONFIG_LED_CONTROL = y
 CONFIG_LED_ENABLE = y
 ########################## Features ###########################
-CONFIG_NET_NS = n
+CONFIG_NET_NS = y
 CONFIG_IPV6_DISABLE = n
 CONFIG_MP_INCLUDED = y
 CONFIG_CONCURRENT_MODE = n
@@ -78,7 +62,7 @@ CONFIG_WIFI_MONITOR = y
 # Otherwise some channels may be  flagged 'NO-IR' (i.e. Passive scanning) by the driver.
 # Please check your country's regulatory domain first,
 # to see whether active scanning is permitted by law/regulations on the desired channels.
-CONFIG_DISABLE_REGD_C=y
+CONFIG_DISABLE_REGD_C = y
 CONFIG_MCC_MODE = n
 CONFIG_APPEND_VENDOR_IE_ENABLE = n
 CONFIG_RTW_NAPI = y
@@ -696,7 +680,7 @@ EXTRA_CFLAGS += -DDM_ODM_SUPPORT_TYPE=0x04
 ifeq ($(CONFIG_PLATFORM_I386_PC), y)
 EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
 EXTRA_CFLAGS += -DRTW_USE_CFG80211_STA_EVENT
-SUBARCH := $(shell uname -m | sed -e s/i.86/i386/ | sed -e s/ppc64le/powerpc/)
+SUBARCH := $(shell uname -m | sed -e "s/i.86/i386/; s/ppc/powerpc/; s/armv.l/arm/; s/aarch64/arm64/;")
 ARCH ?= $(SUBARCH)
 CROSS_COMPILE ?=
 KVER  := $(shell uname -r)
