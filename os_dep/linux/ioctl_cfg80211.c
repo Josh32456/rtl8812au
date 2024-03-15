@@ -5283,6 +5283,33 @@ exit:
 	return ret;
 }
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 7, 0))
+static int cfg80211_rtw_change_beacon(struct wiphy *wiphy, struct net_device *ndev,
+                struct cfg80211_ap_update *info)
+{
+	int ret = 0;
+	_adapter *adapter = (_adapter *)rtw_netdev_priv(ndev);
+
+	RTW_INFO(FUNC_NDEV_FMT"\n", FUNC_NDEV_ARG(ndev));
+
+        ret = rtw_add_beacon(adapter, info->beacon.head, info->beacon.head_len,
+                             info->beacon.tail, info->beacon.tail_len);
+
+        // In cases like WPS, the proberesp and assocresp IEs vary from the beacon, and need to be explicitly set
+        if(ret == 0) {
+                if(info->beacon.proberesp_ies && info->beacon.proberesp_ies_len > 0) {
+                        rtw_cfg80211_set_mgnt_wpsp2pie(ndev, (char *)info->beacon.proberesp_ies,
+                                info->beacon.proberesp_ies_len, 0x2/*PROBE_RESP*/);
+                }
+                if(info->beacon.assocresp_ies && info->beacon.assocresp_ies_len > 0) {
+                        rtw_cfg80211_set_mgnt_wpsp2pie(ndev, (char *)info->beacon.assocresp_ies,
+                                info->beacon.assocresp_ies_len, 0x4/*ASSOC_RESP*/);
+                }
+        }
+
+	return ret;
+}
+#else
 static int cfg80211_rtw_change_beacon(struct wiphy *wiphy, struct net_device *ndev,
 		struct cfg80211_beacon_data *info)
 {
@@ -5307,6 +5334,7 @@ static int cfg80211_rtw_change_beacon(struct wiphy *wiphy, struct net_device *nd
 
 	return ret;
 }
+#endif
 
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 19, 2))
 static int cfg80211_rtw_stop_ap(struct wiphy *wiphy, struct net_device *ndev)
